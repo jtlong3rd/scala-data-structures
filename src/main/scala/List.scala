@@ -10,6 +10,15 @@ sealed trait List[+A] {
 
     folder(this, acc)
   }
+
+  def reverse(): List[A] = {
+    def reverser(left: List[A], reversed: List[A]): List[A] = left match {
+      case Nil => reversed
+      case Cons(head, tail) => reverser(tail, Cons(head, reversed))
+    }
+
+    reverser(this, Nil)
+  }
 }
 
 // In English, a list can be built up by starting will

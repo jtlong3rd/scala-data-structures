@@ -15,4 +15,12 @@ class ListTest extends FunSuite with Matchers {
     List(1, 2, 3, 4).foldLeft(0)(_ + _) should be ( 10 )
     List("Jamie", "Lindsey").foldLeft(0)(_ + _.length) should be ( 12 )
   }
+
+  test("reverse") {
+    List().reverse() should be ( List() )
+    List(1).reverse() should be ( List(1) )
+    List(1, 2).reverse() should be ( List(2, 1) )
+    List(1, 2, 3).reverse() should be ( List(3, 2, 1) )
+    List(1, 2, 3, 4).reverse() should be ( List(4, 3, 2, 1) )
+  }
 }
