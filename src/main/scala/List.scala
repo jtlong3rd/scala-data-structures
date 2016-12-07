@@ -1,8 +1,11 @@
+import scala.annotation.tailrec
+
 // The List trait is "sealed" so as to ensure that
 // it cannot be extended by anything other than
 // the two case classes ("patterns") below
 sealed trait List[+A] {
   def foldLeft[B](acc: B)(f: (B, A) => B): B = {
+    @tailrec
     def folder(as: List[A], acc: B): B = as match {
       case Nil => acc
       case Cons(head, tail) => folder(tail, f(acc, head))
@@ -12,6 +15,7 @@ sealed trait List[+A] {
   }
 
   def reverse(): List[A] = {
+    @tailrec
     def reverser(left: List[A], reversed: List[A]): List[A] = left match {
       case Nil => reversed
       case Cons(head, tail) => reverser(tail, Cons(head, reversed))
@@ -20,7 +24,7 @@ sealed trait List[+A] {
     reverser(this, Nil)
   }
 
-  def foldRight[B](acc: B)(f: (A, B) => B): B = (this.reverse() foldLeft acc) (
+  def foldRight[B](acc: B)(f: (A, B) => B): B = (this.reverse foldLeft acc) (
     (a, b) => f(b, a)
   )
 }
