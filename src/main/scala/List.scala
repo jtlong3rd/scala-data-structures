@@ -19,6 +19,10 @@ sealed trait List[+A] {
 
     reverser(this, Nil)
   }
+
+  def foldRight[B](acc: B)(f: (A, B) => B): B = (this.reverse() foldLeft acc) (
+    (a, b) => f(b, a)
+  )
 }
 
 // In English, a list can be built up by starting will

@@ -23,4 +23,12 @@ class ListTest extends FunSuite with Matchers {
     List(1, 2, 3).reverse() should be ( List(3, 2, 1) )
     List(1, 2, 3, 4).reverse() should be ( List(4, 3, 2, 1) )
   }
+
+  test("foldRight") {
+    List().foldRight(0)((x: Int, y: Int) => x + y) should be ( 0 )
+    List(1).foldRight(0)(_ + _) should be ( 1 )
+    List(1).foldRight(2)(_ + _) should be ( 3 )
+    List(1, 2, 3, 4).foldRight(0)(_ + _) should be ( 10 )
+    List("Jamie", "Lindsey").foldRight(0)(_.length + _) should be ( 12 )
+  }
 }
