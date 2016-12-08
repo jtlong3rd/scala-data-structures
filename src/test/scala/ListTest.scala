@@ -17,11 +17,11 @@ class ListTest extends FunSuite with Matchers {
   }
 
   test("reverse") {
-    List().reverse() should be ( List() )
-    List(1).reverse() should be ( List(1) )
-    List(1, 2).reverse() should be ( List(2, 1) )
-    List(1, 2, 3).reverse() should be ( List(3, 2, 1) )
-    List(1, 2, 3, 4).reverse() should be ( List(4, 3, 2, 1) )
+    List().reverse should be ( List() )
+    List(1).reverse should be ( List(1) )
+    List(1, 2).reverse should be ( List(2, 1) )
+    List(1, 2, 3).reverse should be ( List(3, 2, 1) )
+    List(1, 2, 3, 4).reverse should be ( List(4, 3, 2, 1) )
   }
 
   test("foldRight") {
@@ -30,5 +30,16 @@ class ListTest extends FunSuite with Matchers {
     List(1).foldRight(2)(_ + _) should be ( 3 )
     List(1, 2, 3, 4).foldRight(0)(_ + _) should be ( 10 )
     List("Jamie", "Lindsey").foldRight(0)(_.length + _) should be ( 12 )
+  }
+
+  test("concatenation operator") {
+    List() ++ List() should be ( List() )
+    List(1) ++ List() should be ( List(1) )
+    List() ++ List(1) should be ( List(1) )
+    List() ++ List(1, 2, 3, 4) should be ( List(1, 2, 3, 4) )
+    List(1) ++ List(2, 3, 4) should be ( List(1, 2, 3, 4) )
+    List(1, 2) ++ List(3, 4) should be ( List(1, 2, 3, 4) )
+    List(1, 2, 3) ++ List(4) should be ( List(1, 2, 3, 4) )
+    List(1, 2, 3, 4) ++ List() should be ( List(1, 2, 3, 4) )
   }
 }

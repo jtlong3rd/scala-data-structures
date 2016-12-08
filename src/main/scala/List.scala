@@ -14,7 +14,7 @@ sealed trait List[+A] {
     folder(this, acc)
   }
 
-  def reverse(): List[A] = {
+  def reverse: List[A] = {
     @tailrec
     def reverser(left: List[A], reversed: List[A]): List[A] = left match {
       case Nil => reversed
@@ -27,6 +27,16 @@ sealed trait List[+A] {
   def foldRight[B](acc: B)(f: (A, B) => B): B = (this.reverse foldLeft acc) (
     (a, b) => f(b, a)
   )
+
+  def ++[B >: A](right: List[B]): List[B] = {
+    @tailrec
+    def concatter(right: List[B], reversedAcc: List[B]): List[B] = right match {
+      case Nil => reversedAcc.reverse
+      case Cons(head, tail) => concatter(tail, Cons(head, reversedAcc))
+    }
+
+    concatter(right, this.reverse)
+  }
 }
 
 // In English, a list can be built up by starting will
