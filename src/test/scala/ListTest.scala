@@ -42,4 +42,16 @@ class ListTest extends FunSuite with Matchers {
     List(1, 2, 3) ++ List(4) should be ( List(1, 2, 3, 4) )
     List(1, 2, 3, 4) ++ List() should be ( List(1, 2, 3, 4) )
   }
+
+  test("map") {
+    List() map ((x: Int) => -x) should be ( List() )
+    List(1) map (-_) should be ( List(-1) )
+    List(1, 2) map (-_) should be ( List(-1, -2) )
+    List("Jamie", "Lindsey") map (_.length) should be ( List(5, 7) )
+    List(1, 2) map (x => List(x, x * 2)) should be ( List(List(1, 2), List(2, 4)) )
+  }
+
+  test("flatMap") {
+    List(1, 2) flatMap (x => List(x, x * 2)) should be ( List(1, 2, 2, 4) )
+  }
 }

@@ -37,6 +37,10 @@ sealed trait List[+A] {
 
     concatter(right, this.reverse)
   }
+
+  def map[B](f: A => B): List[B] = (this foldRight (Nil: List[B])) ((next, mapped) => Cons(f(next), mapped))
+
+  def flatMap[B](f: A => List[B]): List[B] = (this foldRight (Nil: List[B])) ((next, mapped) => f(next) ++ mapped)
 }
 
 // In English, a list can be built up by starting will
