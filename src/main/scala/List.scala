@@ -41,6 +41,10 @@ sealed trait List[+A] {
   def map[B](f: A => B): List[B] = (this foldRight (Nil: List[B])) ((next, mapped) => Cons(f(next), mapped))
 
   def flatMap[B](f: A => List[B]): List[B] = (this foldRight (Nil: List[B])) ((next, mapped) => f(next) ++ mapped)
+
+  def filter(f: A => Boolean): List[A] = (this foldRight (Nil: List[A])) (
+    (next, filtered) => if (f(next)) Cons(next, filtered) else filtered
+  )
 }
 
 // In English, a list can be built up by starting will

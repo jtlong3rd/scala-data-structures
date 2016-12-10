@@ -54,4 +54,11 @@ class ListTest extends FunSuite with Matchers {
   test("flatMap") {
     List(1, 2) flatMap (x => List(x, x * 2)) should be ( List(1, 2, 2, 4) )
   }
+
+  test("filter") {
+    List() filter((x: Int) => x % 2 == 0) should be ( List() )
+    List(1, 3, 5) filter (_ % 2 == 0) should be ( List() )
+    List(1, 2, 3, 4, 5) filter (_ % 2 == 0) should be ( List(2, 4) )
+    List(1, 2, 3, 4, 5) filter (_ % 2 == 0) should be ( List(2, 4) )
+  }
 }
