@@ -52,6 +52,7 @@ class ListTest extends FunSuite with Matchers {
   }
 
   test("flatMap") {
+    List(List("Jamie"), List("Lindsey")) flatMap (x => x) should be ( List("Jamie", "Lindsey") )
     List(1, 2) flatMap (x => List(x, x * 2)) should be ( List(1, 2, 2, 4) )
   }
 
