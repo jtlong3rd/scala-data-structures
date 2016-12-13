@@ -45,6 +45,11 @@ sealed trait List[+A] {
   def filter(f: A => Boolean): List[A] = (this foldRight (Nil: List[A])) (
     (next, filtered) => if (f(next)) Cons(next, filtered) else filtered
   )
+
+  def reduceLeft[B >: A](f: (B, B) => B): B = this match {
+    case Nil => throw new Error("Can't reduce an empty list!")
+    case Cons(head, tail) => (tail foldLeft (head: B)) (f)
+  }
 }
 
 // In English, a list can be built up by starting will

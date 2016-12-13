@@ -62,4 +62,10 @@ class ListTest extends FunSuite with Matchers {
     List(1, 2, 3, 4, 5) filter (_ % 2 == 0) should be ( List(2, 4) )
     List(1, 2, 3, 4, 5) filter (_ % 2 == 0) should be ( List(2, 4) )
   }
+
+  test("reduceLeft") {
+    List(1) reduceLeft (_ + _) should be ( 1 )
+    List(1, 2) reduceLeft (_ + _) should be ( 3 )
+    List(1, 2, 3) reduceLeft (_ + _) should be ( 6 )
+  }
 }
