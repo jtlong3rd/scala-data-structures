@@ -50,6 +50,10 @@ sealed trait List[+A] {
     case Nil => throw new Error("Can't reduce an empty list!")
     case Cons(head, tail) => (tail foldLeft (head: B)) (f)
   }
+
+  def reduceRight[B >: A](f: (B, B) => B): B = this.reverse reduceLeft (
+    (b1: B, b2: B) => f(b2, b1)
+  )
 }
 
 // In English, a list can be built up by starting will

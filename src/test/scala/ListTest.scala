@@ -71,4 +71,13 @@ class ListTest extends FunSuite with Matchers {
     List(1, 2) reduceLeft (_ - _) should be ( -1 )
     List(1, 2, 3) reduceLeft (_ - _) should be ( -4 )
   }
+
+  test("reduceRight") {
+    List(1) reduceRight (_ + _) should be ( 1 )
+    List(1, 2) reduceRight (_ + _) should be ( 3 )
+    List(1, 2, 3) reduceRight (_ + _) should be ( 6 )
+    List(1) reduceRight (_ - _) should be ( 1 )
+    List(1, 2) reduceRight (_ - _) should be ( -1 )
+    List(1, 2, 3) reduceRight (_ - _) should be ( 2 )
+  }
 }
