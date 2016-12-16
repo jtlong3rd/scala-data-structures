@@ -24,9 +24,7 @@ sealed trait List[+A] {
     reverser(this, Nil)
   }
 
-  def foldRight[B](acc: B)(f: (A, B) => B): B = (this.reverse foldLeft acc) (
-    (a, b) => f(b, a)
-  )
+  def foldRight[B](acc: B)(f: (A, B) => B): B = (this.reverse foldLeft acc) ((a, b) => f(b, a))
 
   def ++[B >: A](right: List[B]): List[B] = {
     @tailrec
@@ -51,9 +49,7 @@ sealed trait List[+A] {
     case Cons(head, tail) => (tail foldLeft (head: B)) (f)
   }
 
-  def reduceRight[B >: A](f: (B, B) => B): B = this.reverse reduceLeft (
-    (b1: B, b2: B) => f(b2, b1)
-  )
+  def reduceRight[B >: A](f: (B, B) => B): B = this.reverse reduceLeft ((b1: B, b2: B) => f(b2, b1))
 }
 
 // In English, a list can be built up by starting will
