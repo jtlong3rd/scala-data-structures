@@ -3,6 +3,9 @@ import scala.annotation.tailrec
 // The List trait is "sealed" so as to ensure that
 // it cannot be extended by anything other than
 // the two case classes ("patterns") below
+// N.B. All of the methods are built up from
+// tail-recursive implementations of "foldLeft"
+// and "reverse"
 sealed trait List[+A] {
   def foldLeft[B](acc: B)(f: (B, A) => B): B = {
     @tailrec
@@ -59,7 +62,7 @@ case object Nil extends List[Nothing]
 case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
 // This is the "companion object" for the List trait
-// All of our static/factory methods will placed here
+// All of our static/factory methods will be placed here
 object List {
   def apply[A](args: A*): List[A] = (args foldRight (Nil: List[A])) (Cons(_, _))
 }
