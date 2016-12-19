@@ -80,4 +80,11 @@ class ListTest extends FunSuite with Matchers {
     List(1, 2) reduceRight (_ - _) should be ( -1 )
     List(1, 2, 3) reduceRight (_ - _) should be ( 2 )
   }
+
+  test("flatten") {
+    List.flatten(List(List())) should be ( List() )
+    List.flatten(List(List(1))) should be ( List(1) )
+    List.flatten(List(List(1, 2))) should be ( List(1, 2) )
+    List.flatten(List(List(1, 2, 3))) should be ( List(1, 2, 3) )
+  }
 }

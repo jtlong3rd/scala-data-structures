@@ -65,4 +65,6 @@ case class Cons[+A](head: A, tail: List[A]) extends List[A]
 // All of our static/factory methods will be placed here
 object List {
   def apply[A](args: A*): List[A] = (args foldRight (Nil: List[A])) (Cons(_, _))
+
+  def flatten[A](lla: List[List[A]]): List[A] = lla flatMap (x => x)
 }
