@@ -86,5 +86,9 @@ class ListTest extends FunSuite with Matchers {
     List.flatten(List(List(1))) should be ( List(1) )
     List.flatten(List(List(1, 2))) should be ( List(1, 2) )
     List.flatten(List(List(1, 2, 3))) should be ( List(1, 2, 3) )
+    List.flatten(List(List(List()))) should be ( List(List()) )
+    List.flatten(List(List(List(1)))) should be ( List(List(1)) )
+    List.flatten(List(List(List(1, 2)))) should be ( List(List(1, 2)) )
+    List.flatten(List(List(List(1, 2, 3)))) should be ( List(List(1, 2, 3)) )
   }
 }
