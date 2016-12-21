@@ -41,6 +41,7 @@ class ListTest extends FunSuite with Matchers {
     List(1, 2) ++ List(3, 4) should be ( List(1, 2, 3, 4) )
     List(1, 2, 3) ++ List(4) should be ( List(1, 2, 3, 4) )
     List(1, 2, 3, 4) ++ List() should be ( List(1, 2, 3, 4) )
+    List(1) ++ List("Jamie") should be ( List(1, "Jamie") )
   }
 
   test("map") {
